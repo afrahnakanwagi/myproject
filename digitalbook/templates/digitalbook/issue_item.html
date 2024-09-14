@@ -1,0 +1,24 @@
+{% extends 'digitalbook/base.html'%} 
+{% load crispy_forms_tags%} 
+{% load static %}
+{% block content%}
+<br/>
+<button type="submit" class="btn btn-primary"><a href="/home/" style="text-decoration:none; color:white;">Back</a></button>
+<button type="submit" class="btn btn-primary" style="float:right;"><a href="/receipt/" style="text-decoration:none; color:white;">Next</a></button>
+
+
+<div class="container">
+  <form method="POST" action = ""  style="border-radius: 25px;
+  border: 2px solid white;  background-color: rgba(0, 0, 0, 0.4); 
+ padding: 20px; font-weight:bolder; color: black; 
+  width: 400px;
+  height: auto; ">
+    <h1 class = "text-center">SALES FORM</h1><br/>
+    {% csrf_token %} 
+    {{sales_form | crispy}}
+    <button type="reset" class="btn btn-danger" style="height:50px;">Cancel</button>
+    <input type = "submit" class="btn btn-primary btn"type="button" style="float:right; width:200px; height:50px;">
+
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'digitalbook/base.html' %}
+{% block content %}
+<br /><br>
+
+<style>
+  .card {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+}
+
+  .container {
+    padding: 40px;
+  }
+
+  .card-body {
+    background: #d5d1defe;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bolder;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: bolder;
+  }
+
+  .card-header {
+    font-size: 2.0rem;
+    font-weight: bolder;
+  }
+
+  .highlight {
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bolder;
+  }
+
+  .card-text {
+    font-weight: bolder;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .col-lg-5 {
+    flex: 0 0 calc(50% - 20px);
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .col-lg-5 {
+      flex: 0 0 100%;
+    }
+  }
+</style>
+<button type="submit" class="btn btn-primary" style="width: 100px; height: 50px;"><a href="/home" style="text-decoration:none; color:white; font-weight:bolder;">Back</a></button>
+
+<div class="container">
+  <h1 class="card-header text-center">ALL RECEIPTS</h1><br>
+  
+  <div class="row">
+    {% for sale in sales %}
+    <div class="col-lg-5">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Customer: <span class="highlight">{{ sale.issued_to | title }}</span></h3>
+          <h6 class="card-text">Item: <span class="highlight">{{sale.item}}</span></h6>
+          <h6 class="card-text">Amount Paid: <span class="highlight">UGX{{sale.amount_received}}</span></h6>
+          <h6 class="card-text">Quantity:Kgs {{ sale.quantity }}</h6>
+          <h2>Total Price: <span class="highlight">UGX{{sale.get_total}}</span></h2>
+          <div style="flex: 1">
+            <h6 class="card-text">Change Collected: <span class="highlight">UGX{{sale.get_change}}</span></h6>
+            <a href="{% url 'receipt_detail' sale.id %}">
+              <input type="submit" value="Final Receipt" class="btn btn-danger" style="float:right;" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

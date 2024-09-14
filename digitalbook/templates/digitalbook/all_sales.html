@@ -1,0 +1,193 @@
+{% extends 'digitalbook/base.html'%}
+{% load static %}
+
+
+{% block content %}
+
+<style>
+    .container {
+        margin-top: 20px;
+    }
+    
+    /* Styling for the main title */
+    h1.text-center {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 30px;
+    }
+    
+    
+    .card {
+        width: 500px;
+        margin: 0 auto;
+        border-radius: 10px;
+        background-color: rgba(0, 0, 0, 0.1); 
+      
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        transition: transform 0.3s ease-in-out;
+        margin-bottom: 20px;
+      }
+    
+    .card:hover {
+        transform: translateY(-10px);
+    }
+    
+    
+    .card-body {
+        text-align: center;
+        padding: 20px;
+        transition: background-color 0.3s ease-in-out;
+        background-color: #f9f9f9;
+        color: #333;
+        border-radius: 5px;
+    }
+    
+    .card-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 10px;
+    }
+    
+    .card-text {
+        font-size: 1.1rem;
+        color: black;
+        margin-bottom: 5px;
+        font-weight:bolder;
+    }
+    
+    
+    .row.text-center {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+    
+    .col-lg-4 {
+        display: flex;
+        justify-content: center;
+        
+    }
+    
+    /* using  this to adjust spacing for our smaller screens */
+    @media (max-width: 767px) {
+        .col-lg-4 {
+            margin-bottom: 20px;
+        }
+    }
+
+    .highlight{
+        color:brown;
+        font-weight:bolder;
+    }
+    .card-body a{
+        text-decoration:none;
+    }
+    
+    .text-column {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 20px;
+    }
+  
+    
+</style>
+<br>
+
+<button type="submit" class="btn btn-primary" style="width: 100px; height: 50px;"><a href="/home" style="text-decoration:none; color:white; font-weight:bolder;">Back</a></button>
+
+
+<div class="container">
+    <h1 class="text-center">TOTAL SALES MADE</h1><br>
+
+    
+    <div class="row text-center">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Amount Expected </h5>
+                    <p class="card-text">UGX{{total_expected}}</p>
+                </div>
+            </div>
+        </div>
+    <div class="row text-center">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Amount Received</h5>
+                    <p class="card-text">UGX{{total}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <a href="">
+                    <h5 class="card-title">Total Debt Issued </h5>
+                    <p class="card-text">UGX{{total_change}}</p>
+                </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Net Amount</h5>
+                    <p class="card-text">UGX{{net}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="container">
+    <div class="row">
+        {% for sale in sales %}
+        <div class="col-lg-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <a href="/receipt_detail/{{sale.id}}">
+                        <div class="text-column">
+                            <span class="title">Customer:</span>
+                            <span class="value highlight">{{sale.issued_to | title}}</span>
+                        </div>
+                        <div cla
+                        <div class="text-column">
+                            <span class="title">Item Bought:</span>
+                            <span class="value highlight">{{sale.item | title}}</span>
+                        </div>
+                        <div class="text-column">
+                            <span class="title">Quantity (Kgs):</span>
+                            <span class="value highlight">{{sale.quantity}}</span>
+                        </div>
+                        <div class="text-column">
+                            <span class="title">Unit Price:</span>
+                            <span class="value highlight">UGX {{sale.unit_price}}</span>
+                        </div>
+                        <div class="text-column">
+                            <span class="title">Total Cost:</span>
+                            <span class="value highlight">UGX {{sale.get_total}}</span>
+                        </div>
+                        <div class="text-column">
+                            <span class="title">Amount Paid:</span>
+                            <span class="value highlight">UGX {{sale.amount_received}}</span>
+                        </div>
+                        <div class="text-column">
+                            <span class="title">Change Collected:</span>
+                            <span class="value highlight">UGX {{sale.get_change}}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+

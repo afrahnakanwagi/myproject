@@ -1,0 +1,347 @@
+{% extends 'digitalbook/base.html' %}
+{% block content %}
+
+<style>
+  form{
+    height:100px;
+    width: 500px;
+  }
+   form input{
+    height:50px;
+    width: 520px;
+    border: 2px solid whitesmoke;
+    border-radius:15px;
+    
+   }
+  
+   form label{
+    font-weight: bolder;
+    font-size: 1.5rem;
+   }
+    .filter-container {
+      border: 2px solid #f1f1f1;
+      border-radius: 10px;
+      width: 500px;
+      height:100px;
+      max-width: 900px;
+      padding: 15px;
+      margin: 0 auto;
+      margin-bottom: 20px;
+  
+    }
+  
+    .filter-container form {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    filter-container input[type="submit"] {
+      width: 100%;
+    
+    }
+  .container{
+    background-color: rgba(194, 222, 237, 0.333);
+  }
+  
+  main.table {
+    width: 82vw;
+    height: auto;
+    background: #fff5;
+    backdrop-filter: blur(7px);
+    box-shadow: 0.4rem 0.8rem #0005;
+    border-radius: .8rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .table_header {
+    width: 100%;
+    height: auto;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+  }
+
+  .table_body {
+    width: 85%;
+    max-height: 60vh;
+    background-color: #fffb;
+    margin: .8rem auto;
+    border-radius: .6rem;
+    overflow: auto;
+  }
+
+  .table_body::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
+  .table_body::-webkit-scrollbar-thumb {
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+  }
+
+  .table_body:hover::-webkit-scrollbar-thumb:hover {
+    visibility: visible;
+  }
+
+  table,
+  th,
+  td {
+    padding: 0.2rem;
+    height: 0.5rem;
+    border-collapse: collapse;
+    border: 3px solid #0000000b;
+    width:100%;
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    background-color: #d5d1defe;
+  }
+
+  tbody {
+    background-color: #0000000b;
+  }
+
+  .card {
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.card-body {
+    margin-top: 10px;
+}
+
+.card-body .btn {
+    display: inline-block;
+    padding: 10px 20px; 
+    background-color: #f9f9f9;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.card-body .btn:hover {
+  background-color: #f9f9f9;
+}
+h3{
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color:black;
+}
+
+.card-table {
+  width: 30%;
+  height: 350px; 
+  margin: 10px; 
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.05); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  display: inline-block;
+  vertical-align: top; 
+}
+
+.card-table:hover {
+  transform: translateY(-10px);
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 15px;
+}
+
+.text-column {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  background-color: #f9f9f9;
+  border-radius:10px;
+}
+
+.text-column span {
+  font-weight: bold;
+  color: #333;
+}
+
+.text-column .value {
+  font-weight: normal;
+  color: #000;
+}
+
+.table-body-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+
+@media (max-width: 992px) {
+  .card-table {
+      width: 45%;
+      margin-bottom: 20px;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .card-table {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+}
+
+.filter-container{
+ border:2px solid white;
+ background-color: rgba(0, 0, 0, 0.05); 
+ border-radius:15px;
+ width:900px;
+ height: 70px;
+}
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.filter-container form {
+  flex-grow: 1;
+}
+
+.filter-container input[type="submit"] {
+  margin-left: 10px;
+}
+
+
+</style>
+<br>
+<div style="margin: 0 auto; padding: 20px;">
+<button type="submit" class="btn btn-primary" style="width: 100px; height: 50px;"><a href="/login" style="text-decoration:none; color:white; font-weight:bolder;">Back</a></button>
+</div>
+
+<br><br>
+
+<div class="container">
+  <main class="table">
+    <section class="table_header">
+      <h1 class="text-center" style="color: black; font-weight: bolder;">STOCK</h1>
+    </section>
+    <div class = "container">
+      <div class="row">
+        <div class="col-md-4"></div>
+      </div>
+      <div>
+        <div class="filter-container">
+          <form method="GET" class="row g-3" style="font-weight:bolder;">
+            <div class="col-md-10">
+              {{ product_filters.form }}
+            </div>
+            <div class="col-md-2">
+              <input type="submit" value="Search" style="font-weight:bolder; background: black; font-size:1.4rem;" class="btn btn-primary btn-block" />
+            </div>
+          </form>
+    </div>
+    </div>
+    <div class="container">
+      {% for product in products %}
+      <div class="card-table">
+          <div class="card-title">{{ product.item_name }}</div>
+
+          <div class="table-container">
+              <div class="text-column">
+                  <span>Branch Name:</span>
+                  <span class="value">{{ product.stock_branch_name }}</span>
+              </div>
+              <div class="text-column">
+                  <span>Unit Cost (UGX):</span>
+                  <span class="value">UGX {{ product.unit_cost }}</span>
+              </div>
+              <div class="text-column">
+                  <span>Unit Price (UGX):</span>
+                  <span class="value">UGX {{ product.unit_price }}</span>
+              </div>
+              <div class="text-column">
+                  <span>Total Quantity (Kgs):</span>
+                  <span class="value">{{ product.total_quantity }}</span>
+              </div>
+
+              <div class="table-body-actions">
+                <a href="{% url 'delete_detail' product.id %}"><button class="btn btn-danger btn" style="width: 120px;">Delete Item</button></a>
+
+                <a href="{% url 'product_detail' product.id %}"><button class="btn btn-primary btn font-weight-bolder" style="width: 100px; height: 55px;">View Details</button>
+                  </a>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
+</section>
+</div>
+
+<div class="row d-flex justify-content-between">
+  <div class="col-lg-4 mb-4">
+<div class="card">
+ <div class="cardtitle">
+  <h3>Deffered Payments</hh>
+ </div> 
+ <div class="cardbody">
+  <button type="submit" class="btn btn-success"> <a href="{% url "deffered_payments" %}"style="text-decoration:none; color:white; font-weight:bolder;">add deffred payments</a></button>
+ </div>
+</div>
+</div>
+
+<div class="col-lg-4 mb-4">
+  <div class="card">
+   <div class="cardtitle">
+    <h3>View Credit Sales</h3>
+   </div>
+   <div class="cardbody">
+    <button type="submit" class="btn btn-success"><a href="{% url "deffered_payments_list" %}"style="text-decoration:none; color:white; font-weight:bolder;">view deffered payments</a></button>
+   </div>
+  </div>
+</div>
+
+<div class="col-lg-4 mb-4">
+  <div class="card">
+   <div class="cardtitle">
+    <h3>Add Product</h3>
+   </div>
+   <div class="cardbody">
+    <button type="submit" class="btn btn-success"><a href="{% url "add_product" %}" style="text-decoration:none; color:white; font-weight:bolder;">Add Product </a></button>
+   </div>
+  </div>
+</div>
+
+</div>
+
+
+
+{% endblock %}

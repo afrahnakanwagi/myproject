@@ -1,0 +1,53 @@
+{% extends 'digitalbook/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<style>
+
+    footer {
+        background: black;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        color: white;
+        position: fixed;
+        padding: 10px 0;
+        font-size: 14px;
+    }
+
+    .scrollable-vertical {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+</style>
+
+{% block content %}
+<br><br>
+<button type="submit" class="btn btn-primary" style="width: 100px; height: 50px;"><a href="/" style="text-decoration:none; color:white; font-weight:bolder;">Back</a></button>
+
+<div class="container scrollable-vertical">
+    <div class="body container-fluid container login">
+
+
+        <div class="container container-fluid">
+            <form id="form" method="POST" class="loginform" style="border-radius: 25px;
+        border: 2px solid white;  padding: 20px; color: black; font-weight:bolder; 
+        width: 400px;
+        height: 350px; background-color: rgba(0, 0, 0, 0.4); 
+ ">
+                {% csrf_token %}
+                {{form | crispy}}
+                <br> <br>
+                <button type="submit" name="Login" class="btn btn-primary "
+                    style="border-radius: 5px; font-weight: bolder; width: 350px; height: 50px; font-size:x-large; color:white;">Login</button>
+                <br>
+
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}

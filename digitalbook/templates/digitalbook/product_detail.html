@@ -1,0 +1,104 @@
+{% extends 'digitalbook/base.html'%} {% block content%}
+<style>
+
+.card-body {
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 20px;
+  transition: background-color 0.3s ease-in-out;
+  background-color: #f9f9f9;
+  color: #333;
+  border-radius: 5px;
+  color: #555;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.card-title {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: #222;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.card-body .row {
+    display: flex;
+  
+}
+
+.card {
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1); 
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+}
+
+h3{
+  font-size: 1.2rem;
+  font-weight: bolder;
+  color:black;
+}
+
+p{
+  font-weight: bold;
+  font-size:1.2rem;
+}
+
+.container{
+  background-color:rgba(255, 255, 255, 0.2);
+}
+
+
+
+
+</style>
+<br></br>
+
+<button type="submit" class="btn btn-primary" style="width: 100px; height: 50px;"><a href="/home/" style="text-decoration:none; color:white;">Back</a></button>
+<button type="submit" class="btn btn-primary" style="float:right; width: 100px; height: 50px;"><a href="" style="text-decoration:none; color:white;">Next</a></button>
+
+
+<div class="card">
+  <h5 class="card-title">ITEM DETAILS</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-5">
+        <h3>Name:</h3>
+        <h3>Quantity:</h3>
+        <h3>Unit Cost:</h3>
+        <h3>Unit Price:</h3>
+      </div>
+      <div class="col-lg-5">
+        <h3>{{product.item_name}}</h3>
+        <h3>{{product.total_quantity}}</h3>
+        <h3>UGX{{product.unit_cost}}</h3>
+        <h3>UGX{{product.unit_price}}</h3>
+      </div>
+    </div>
+    <div class="first">
+      <a href="{% url 'add_to_stock' product.id %}" ><input type= "submit" value="Update Stock" class="btn btn-secondary btn" type="button" style="background-color: green; font-weight: bolder; float:left;"/></a>
+      <a href="{% url 'issue_item' product.id %}" ><input type="submit" value="Sale Item" class="btn btn-primary" style="width: 120px; height: 50px; float:right;" btn type="button"/></a>
+
+  </div>
+  </div>
+</div>
+
+
+</div>
+
+{% endblock%}
+

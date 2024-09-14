@@ -1,0 +1,20 @@
+{% extends 'digitalbook/base.html'%} 
+{% load crispy_forms_tags%} 
+{% load static %}
+{% block content%}
+<br/>
+
+<div class="container">
+  <form method="POST" action = ""  style="border-radius: 25px;
+  border: 2px solid white;  padding: 20px; color: black; 
+  width: 400px;
+  height: auto; ">
+    <h1 class = "text-center
+    ">RECORDS SALES</h1><br>
+    {% csrf_token %} 
+    {{sales_form | crispy}}
+    <input type = "submit" class="btn btn-primary btn"type="button">
+    <button type="reset" class="btn btn-danger">Cancel</button>
+  </form>
+</div>
+{% endblock %}

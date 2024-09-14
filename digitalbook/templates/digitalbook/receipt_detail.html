@@ -1,0 +1,155 @@
+{% extends 'digitalbook/base.html' %}
+{% load static %}
+{% block content %}
+
+<br />
+<style>
+  .container {
+    background-color:  #fff5;
+    font-weight: bolder;
+    border-radius: 20px;
+    height: auto;
+    width: 1000px;
+  }
+  .card {
+    background-color: rgb(198, 229, 234);
+    border-radius: 5px;
+  }
+  table, th, td {
+    padding: 1rem;
+    border-collapse: collapse;
+    border: 3px solid #0000000b;
+    text-align: center;
+  }
+
+  h6{
+    font-size: 0.8rem;
+    text-align: center;
+    font-weight:bolder;
+  }
+
+  h5{
+    font-size: 0.8rem;
+    text-align: center;
+    font-weight:bolder;
+  }
+  thead{
+    background-color:  #d5d1defe;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .lead{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: black;
+  }
+
+  p{
+    font-size:1.5rem;
+    font-weight:bolder;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    text-align: center;
+  }
+
+  .print {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .print a {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bolder;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .print a i {
+    margin-right: 5px;
+    font-size: 14px; 
+  }
+</style>
+
+<br>
+<button type="submit" class="btn btn-primary" style="width: 100px; height: 50px;"><a href="/all_sales" style="text-decoration:none; color:white; font-weight:bolder;">Back</a></button>
+
+<div class="container">
+  <div class="card mb-4">
+    <div class="card-header text-center">
+      <img src="{% static 'digitalbook/images/logo4.png' %}" alt="Logo" style="height: 90px; border-radius: 40px;">
+      <h5>Happy Hoe Grocery</h5>
+      <h5>Contact:075258966, 077653259</h5>
+      <h5>Address: 123 Maganjo Street, Kampala</h5>
+      <h5>www.happyhoe.ltd</h5>
+      <h6>Date: {{ receipt.date }} &nbsp;&nbsp;</h6>
+    </div>
+  </div>
+  <div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="text-center">ORDER SUMMARY</h1><br>
+            <h2 class="lead">Customer Name: {{receipt.issued_to | title}}</h2>
+          </div>
+          <div class="card-block">
+            <div class="table-responsive">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <td><strong>Item Name</strong></td>
+                    <td class="text-xs-center"><strong>Quantity(Kgs)</strong></td>
+                    <td class="text-xs-right"><strong>Total Bill(Ugx)</strong></td>
+                    <td class="text-xs-right"><strong>Amount Paid(Ugx)</strong></td>
+                    <td class="text-xs-right">
+                      <strong>Balance(UgX)</strong>
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{receipt.item| title}}</td>
+                    <td class="text-xs-center">{{receipt.quantity }}</td>
+                    <td class="text-xs-center">{{receipt.get_total | title}}</td>
+                    <td class="text-xs-right">{{ receipt.amount_received }}</td>
+                    <td class="text-xs-right">{{ receipt.get_change }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+      <hr>
+      <p>Thank you for shopping with us!</p>
+
+      <div class="print">
+        <button id="print-button" class="btn btn-primary" onclick="printReceipt()">Print Receipt</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div>
+
+</div>
+<script>
+  function printReceipt() {
+    window.print();
+  }
+</script>
+
+{% endblock %}
